@@ -21,11 +21,7 @@ npm run dev                # → http://localhost:5173
 
 ---
 
-## 🔑 Default Admin Login
 
-| Email | Password |
-|-------|----------|
-| admin@masterpools.co.zw | ChangeMe@2024! |
 
 ---
 
@@ -113,28 +109,3 @@ npm run dev                # → http://localhost:5173
 
 ---
 
-## 🏗️ Tailwind v4 Migration Notes
-
-v4 requires NO `tailwind.config.js` and NO `postcss.config.js`.
-Everything is defined in `src/index.css` using the `@theme` directive:
-
-```css
-@import "tailwindcss";
-
-@theme {
-  --font-display: "Cormorant Garamond", serif;
-  --color-aqua-500: #00b8e0;
-  /* ... all custom tokens */
-}
-
-/* Custom component classes */
-.btn { ... }
-.card { ... }
-```
-
-The Vite plugin handles everything:
-```ts
-// vite.config.ts
-import tailwindcss from '@tailwindcss/vite'
-plugins: [tailwindcss(), react()]
-```
