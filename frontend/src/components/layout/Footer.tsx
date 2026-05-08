@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin, Phone, Twitter } from "lucide-react";
+
+import { Link } from "@tanstack/react-router";
 
 export default function Footer() {
   const year = new Date().getFullYear();

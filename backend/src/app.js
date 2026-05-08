@@ -20,10 +20,35 @@ const app = express();
 
 app.set("trust proxy", 1);
 
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+  if (allowedOrigins.includes("*")) return true;
+  if (allowedOrigins.includes(origin)) return true;
+
+  if (process.env.ALLOW_VERCEL_PREVIEWS === "true") {
+    try {
+      const host = new URL(origin).hostname;
+      return host.endsWith(".vercel.app");
+    } catch {
+      return false;
+    }
+  }
+
+  return false;
+};
+
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   }),
@@ -54,7 +79,10 @@ app.get("/api/health", (_req, res) =>
 );
 
 // Serve frontend build in production when available
-if (process.env.NODE_ENV === "production") {
+if (
+  process.env.NODE_ENV === "production" &&
+  process.env.SERVE_FRONTEND === "true"
+) {
   const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
   app.use(express.static(clientBuildPath));
 

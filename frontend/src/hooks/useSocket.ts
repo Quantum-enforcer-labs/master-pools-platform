@@ -1,36 +1,44 @@
-import { useEffect, useRef } from 'react'
-import { io, Socket } from 'socket.io-client'
-import { useAuthStore } from '../stores/auth.store'
+import { useEffect, useRef } from "react";
+import { io, Socket } from "socket.io-client";
+import { useAuthStore } from "../stores/auth.store";
 
-let socketInstance: Socket | null = null
+let socketInstance: Socket | null = null;
+const env = (import.meta as any)?.env ?? {};
+
+const apiBase =
+  typeof env.VITE_API_BASE_URL === "string" ? env.VITE_API_BASE_URL : "";
+const derivedSocketUrl = /^https?:\/\//.test(apiBase)
+  ? apiBase.replace(/\/api\/?$/, "")
+  : "";
+const socketUrl = env.VITE_SOCKET_URL || derivedSocketUrl || "/";
 
 export const useSocket = () => {
-  const { token, isAuthenticated } = useAuthStore()
-  const socketRef = useRef<Socket | null>(null)
+  const { token, isAuthenticated } = useAuthStore();
+  const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated || !token) return
+    if (!isAuthenticated || !token) return;
 
     if (!socketInstance) {
-      socketInstance = io('/', {
+      socketInstance = io(socketUrl, {
         auth: { token },
-        transports: ['websocket', 'polling']
-      })
+        transports: ["websocket", "polling"],
+      });
     }
 
-    socketRef.current = socketInstance
+    socketRef.current = socketInstance;
 
     return () => {
       // Don't disconnect on component unmount — keep alive
-    }
-  }, [isAuthenticated, token])
+    };
+  }, [isAuthenticated, token]);
 
-  return socketRef.current || socketInstance
-}
+  return socketRef.current || socketInstance;
+};
 
 export const disconnectSocket = () => {
   if (socketInstance) {
-    socketInstance.disconnect()
-    socketInstance = null
+    socketInstance.disconnect();
+    socketInstance = null;
   }
-}
+};

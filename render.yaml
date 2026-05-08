@@ -4,8 +4,10 @@ services:
     name: masterpools-api
     runtime: node
     plan: starter
-    buildCommand: cd backend && npm install && npm run seed
-    startCommand: cd backend && npm start
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
@@ -18,7 +20,11 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: CLIENT_URL
-        value: https://masterpools.co.zw
+        value: https://masterpools.vercel.app
+      - key: ALLOW_VERCEL_PREVIEWS
+        value: true
+      - key: SERVE_FRONTEND
+        value: false
       - key: IMAGEKIT_PUBLIC_KEY
         sync: false
       - key: IMAGEKIT_PRIVATE_KEY
@@ -43,15 +49,6 @@ services:
         sync: false
       - key: ADMIN_PASSWORD
         sync: false
-
-  # Frontend service (static site)
-  - type: static_site
-    name: masterpools-web
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://api.masterpools.co.zw
 
 databases:
   - name: masterpools-db
