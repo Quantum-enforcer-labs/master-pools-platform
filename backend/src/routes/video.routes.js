@@ -1,4 +1,3 @@
-import express from "express";
 import {
   deleteVideo,
   getVideos,
@@ -7,10 +6,9 @@ import {
   uploadVideo,
   videoUpload,
 } from "../controllers/video.controller.js";
-import {
-  authenticateToken,
-  authorizeAdmin,
-} from "../middleware/auth.middleware.js";
+import { adminOnly, protect } from "../middleware/auth.middleware.js";
+
+import express from "express";
 
 const router = express.Router();
 
@@ -20,14 +18,14 @@ router.get("/", getVideos);
 // Admin routes (protected)
 router.post(
   "/upload",
-  authenticateToken,
-  authorizeAdmin,
+  protect,
+  adminOnly,
   videoUpload.single("video"),
   uploadVideo,
 );
 
-router.put("/:id", authenticateToken, authorizeAdmin, updateVideo);
-router.delete("/:id", authenticateToken, authorizeAdmin, deleteVideo);
-router.post("/reorder", authenticateToken, authorizeAdmin, reorderVideos);
+router.put("/:id", protect, adminOnly, updateVideo);
+router.delete("/:id", protect, adminOnly, deleteVideo);
+router.post("/reorder", protect, adminOnly, reorderVideos);
 
 export default router;
