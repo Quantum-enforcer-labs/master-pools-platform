@@ -44,18 +44,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/videos", videoRoutes);
 
-// Serve frontend build in production when available
-if (process.env.NODE_ENV === "production") {
-  const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
-  app.use(express.static(clientBuildPath));
-
-  app.get("*", (req, res) => {
-    // let API routes be handled by Express routes above
-    if (req.path.startsWith("/api")) return res.status(404).end();
-    res.sendFile(path.join(clientBuildPath, "index.html"));
-  });
-}
-
 app.get("/api/health", (_req, res) =>
   res.json({
     status: "ok",
@@ -64,6 +52,20 @@ app.get("/api/health", (_req, res) =>
     uptime: Math.floor(process.uptime()),
   }),
 );
+
+// Serve frontend build in production when available
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
+  app.use(express.static(clientBuildPath));
+
+  app.use((req, res, next) => {
+    if (req.method === "GET" && !req.path.startsWith("/api")) {
+      return res.sendFile(path.join(clientBuildPath, "index.html"));
+    }
+
+    next();
+  });
+}
 
 app.use((_req, res) => res.status(404).json({ message: "Route not found" }));
 
