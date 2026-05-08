@@ -25,7 +25,6 @@ export const organizationSchema = {
   description:
     "Zimbabwe's most trusted luxury swimming pool construction company",
   telephone: "+263772562125",
-  email: "info@masterpools.co.zw",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Harare",

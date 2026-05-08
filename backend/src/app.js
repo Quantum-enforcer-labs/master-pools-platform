@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import path from "path";
 import { apiRateLimit } from "./middleware/rateLimit.middleware.js";
 
 import authRoutes from "./routes/auth.routes.js";
@@ -13,6 +14,7 @@ import quotationRoutes from "./routes/quotation.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import userRoutes from "./routes/user.routes.js";
+import videoRoutes from "./routes/video.routes.js";
 
 const app = express();
 
@@ -40,6 +42,19 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/videos", videoRoutes);
+
+// Serve frontend build in production when available
+if (process.env.NODE_ENV === "production") {
+  const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
+  app.use(express.static(clientBuildPath));
+
+  app.get("/*", (req, res) => {
+    // let API routes be handled by Express routes above
+    if (req.path.startsWith("/api")) return res.status(404).end();
+    res.sendFile(path.join(clientBuildPath, "index.html"));
+  });
+}
 
 app.get("/api/health", (_req, res) =>
   res.json({

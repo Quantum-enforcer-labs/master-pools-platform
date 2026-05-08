@@ -26,7 +26,11 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useFeaturedProjects, useProjectStats } from "../hooks/useApi";
+import {
+  useFeaturedProjects,
+  useProjectStats,
+  useVideos,
+} from "../hooks/useApi";
 
 import { Link } from "@tanstack/react-router";
 import { MetaHead } from "../components/seo/MetaHead";
@@ -36,6 +40,7 @@ import {
 } from "../components/seo/StructuredData";
 import ProjectCard from "../components/ui/ProjectCard";
 import ReviewCarousel from "../components/ui/ReviewCarousel";
+import VideoCarousel from "../components/ui/VideoCarousel";
 
 const POOL_CATEGORIES = [
   {
@@ -315,6 +320,7 @@ export default function HomePage() {
   const yearsExp = new Date().getFullYear() - 2014;
   const { data: featured, isLoading } = useFeaturedProjects();
   const { data: stats } = useProjectStats();
+  const { data: videosData = [] } = useVideos(true);
   const reviews = HARDCODED_REVIEWS;
   const completedProjects = Math.max(stats?.completed ?? 150, 150);
   const [activeCategory, setActiveCategory] = useState("residential");
@@ -476,9 +482,9 @@ export default function HomePage() {
                 lineHeight: 1.7,
               }}
             >
-              MATERPOOLS AND CONTRUCTION delivers world-class aquatic experiences. From bespoke
-              residential sanctuaries to championship-grade commercial
-              complexes, we engineer perfection.
+              MATERPOOLS AND CONTRUCTION delivers world-class aquatic
+              experiences. From bespoke residential sanctuaries to
+              championship-grade commercial complexes, we engineer perfection.
             </motion.p>
 
             <motion.div
@@ -1361,6 +1367,30 @@ export default function HomePage() {
             </motion.div>
 
             <ReviewCarousel reviews={HARDCODED_REVIEWS} autoplayDelay={3500} />
+          </div>
+        </section>
+
+        {/* ══ VIDEOS ══════════════════════════════════════════════════════════ */}
+        <section className="section" style={{ background: "#fff" }}>
+          <div className="container-md">
+            <motion.div {...fadeUp()} className="text-center mb-10">
+              <p className="inline-flex items-center rounded-full border border-secondary-200 bg-secondary-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-secondary-700">
+                Videos
+              </p>
+              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                See The Work In Motion
+              </h2>
+            </motion.div>
+
+            {videosData.length > 0 ? (
+              <VideoCarousel videos={videosData} />
+            ) : (
+              <div className="rounded-4xl border border-slate-200 bg-slate-950 p-12 text-center">
+                <p className="text-slate-400">
+                  Video gallery coming soon. Check back later!
+                </p>
+              </div>
+            )}
           </div>
         </section>
 

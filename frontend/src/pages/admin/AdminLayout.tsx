@@ -19,6 +19,7 @@ import {
   Mail,
   Menu,
   MessageCircle,
+  Play,
   Star,
   Users,
 } from "lucide-react";
@@ -34,6 +35,7 @@ const NAV = [
   { to: "/admin/chat", label: "Inbox", icon: MessageCircle, badge: true },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/reviews", label: "Reviews", icon: Star },
+  { to: "/admin/videos", label: "Videos", icon: Play },
   { to: "/admin/contacts", label: "Messages", icon: Mail },
 ];
 

@@ -1,20 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  Moon,
-  Phone,
-  Sun,
-  Twitter,
-} from "lucide-react";
-import { useUIStore } from "../../stores/ui.store";
+import { Facebook, Instagram, Linkedin, Phone, Twitter } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   const yearsExp = year - 2014;
-  const { theme, toggleTheme } = useUIStore();
 
   return (
     <footer
@@ -271,9 +260,9 @@ export default function Footer() {
                   href: "tel:+263772562125",
                 },
                 {
-                  Icon: Mail,
-                  text: "info@masterpools.co.zw",
-                  href: "mailto:info@masterpools.co.zw",
+                  Icon: Phone,
+                  text: "+263 775 206 774",
+                  href: "tel:+263775206774",
                 },
               ].map(({ Icon, text, href }) => (
                 <div
@@ -438,39 +427,6 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
-            <button
-              onClick={toggleTheme}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "1.75rem",
-                height: "1.75rem",
-                borderRadius: "8px",
-                border: "1px solid var(--color-border)",
-                background: "var(--color-gray-100)",
-                color: "var(--color-gray-600)",
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "var(--color-primary-50)";
-                e.currentTarget.style.borderColor = "var(--color-primary-200)";
-                e.currentTarget.style.color = "var(--color-primary-700)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "var(--color-gray-100)";
-                e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.color = "var(--color-gray-600)";
-              }}
-              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              {theme === "dark" ? (
-                <Sun style={{ width: "0.875rem", height: "0.875rem" }} />
-              ) : (
-                <Moon style={{ width: "0.875rem", height: "0.875rem" }} />
-              )}
-            </button>
           </div>
         </div>
       </div>

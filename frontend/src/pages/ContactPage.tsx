@@ -4,7 +4,6 @@ import {
   CheckCircle,
   ChevronRight,
   Clock,
-  Mail,
   MessageCircle,
   Phone,
   Send,
@@ -35,13 +34,6 @@ const INFO = [
     lines: ["+263 772 562 125", "+263 775 206 774"],
     sub: "WhatsApp or call Mon–Fri 8am–5pm · Sat 9am–1pm",
     color: "blue",
-  },
-  {
-    icon: Mail,
-    title: "Email",
-    lines: ["info@masterpools.co.zw", "quotes@masterpools.co.zw"],
-    sub: "Reply within 24 hours",
-    color: "indigo",
   },
   {
     icon: Clock,

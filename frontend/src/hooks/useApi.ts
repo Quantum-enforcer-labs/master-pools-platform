@@ -26,6 +26,8 @@ export const QK = {
   adminUsers: (p?: any) => ["admin-users", p] as const,
   adminContacts: ["admin-contacts"] as const,
   analytics: ["analytics"] as const,
+  videos: ["videos"] as const,
+  adminVideos: ["admin-videos"] as const,
 };
 
 /* ── Auth ────────────────────────────────────────────────────────────────── */
@@ -446,3 +448,62 @@ export const useAnalytics = () =>
     },
     staleTime: 60_000,
   });
+
+/* ── Videos ──────────────────────────────────────────────────────────────── */
+export const useVideos = (active = true) =>
+  useQuery({
+    queryKey: QK.videos,
+    queryFn: () =>
+      api
+        .get<{ videos: any[] }>("/videos", { params: { active } })
+        .then((r) => r.data.videos),
+    staleTime: 5 * 60_000,
+  });
+
+export const useAdminVideos = () =>
+  useQuery({
+    queryKey: QK.adminVideos,
+    queryFn: () =>
+      api
+        .get<{ videos: any[] }>("/videos", { params: { active: false } })
+        .then((r) => r.data.videos),
+  });
+
+export const useUploadVideo = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (fd: FormData) =>
+      api
+        .post("/videos/upload", fd, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((r) => r.data.video),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: QK.videos });
+      qc.invalidateQueries({ queryKey: QK.adminVideos });
+    },
+  });
+};
+
+export const useDeleteVideo = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.delete(`/videos/${id}`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: QK.videos });
+      qc.invalidateQueries({ queryKey: QK.adminVideos });
+    },
+  });
+};
+
+export const useUpdateVideo = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) =>
+      api.put(`/videos/${id}`, data).then((r) => r.data.video),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: QK.videos });
+      qc.invalidateQueries({ queryKey: QK.adminVideos });
+    },
+  });
+};

@@ -1,8 +1,10 @@
 import axios, { type AxiosError } from "axios";
 import toast from "react-hot-toast";
 
+const baseUrl = (import.meta as any)?.env?.VITE_API_BASE_URL ?? "/api";
+
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: baseUrl,
   headers: { "Content-Type": "application/json" },
   timeout: 15_000,
 });
