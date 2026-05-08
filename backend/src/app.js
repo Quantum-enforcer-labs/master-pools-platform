@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === "production") {
   const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
   app.use(express.static(clientBuildPath));
 
-  app.get("/*", (req, res) => {
+  app.get("*", (req, res) => {
     // let API routes be handled by Express routes above
     if (req.path.startsWith("/api")) return res.status(404).end();
     res.sendFile(path.join(clientBuildPath, "index.html"));
