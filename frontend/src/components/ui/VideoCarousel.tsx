@@ -47,7 +47,7 @@ export default function VideoCarousel({ videos, className = "" }: Props) {
   return (
     <div className={`w-full ${className}`}>
       <div className="mx-auto max-w-6xl">
-        <div className="relative overflow-hidden rounded-4xl border border-slate-200 bg-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.25)]">
+        <div className="relative h-64 overflow-hidden rounded-4xl border border-slate-200 bg-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.25)] sm:h-80 lg:h-96">
           <video
             key={currentVideo.src}
             ref={videoRef}
@@ -57,7 +57,7 @@ export default function VideoCarousel({ videos, className = "" }: Props) {
             playsInline
             controls={false}
             onEnded={nextVideo}
-            className="h-full w-full min-h-88 object-cover sm:min-h-112"
+            className="h-full w-full object-contain"
           />
 
           <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent" />
