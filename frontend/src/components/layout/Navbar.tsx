@@ -7,11 +7,9 @@ import {
   LogOut,
   Menu,
   MessageCircle,
-  Moon,
   Search,
   Shield,
   Sparkles,
-  Sun,
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -35,8 +33,7 @@ export default function Navbar() {
   const searchRef = useRef<HTMLInputElement>(null);
 
   const { isAuthenticated, user, logout } = useAuthStore();
-  const { mobileMenuOpen, setMobileMenuOpen, setChatOpen, theme, toggleTheme } =
-    useUIStore();
+  const { mobileMenuOpen, setMobileMenuOpen, setChatOpen } = useUIStore();
   const navigate = useNavigate();
   const { data: convData } = useConversations(
     isAuthenticated && user?.role !== "admin",
@@ -280,45 +277,7 @@ export default function Navbar() {
             <Search style={{ width: "1rem", height: "1rem" }} />
           </button>
 
-          {/* Theme toggle (desktop) */}
-          <button
-            onClick={toggleTheme}
-            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            style={{
-              padding: "0.4375rem",
-              borderRadius: "8px",
-              border: "1px solid var(--color-border)",
-              background: "transparent",
-              cursor: "pointer",
-              color: "var(--color-gray-500)",
-              transition: "all 0.15s ease",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as any).style
-                .setProperty(
-                  "background",
-                  "var(--color-gray-100)",
-                )(e.currentTarget as any)
-                .style.setProperty("color", "var(--color-text)");
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as any).style
-                .setProperty(
-                  "background",
-                  "transparent",
-                )(e.currentTarget as any)
-                .style.setProperty("color", "var(--color-gray-500)");
-            }}
-          >
-            {theme === "dark" ? (
-              <Sun style={{ width: "1rem", height: "1rem" }} />
-            ) : (
-              <Moon style={{ width: "1rem", height: "1rem" }} />
-            )}
-          </button>
+          {/* Theme toggle removed */}
 
           {isAuthenticated ? (
             <>
@@ -627,32 +586,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile toggle */}
-        {/* Theme toggle (mobile) */}
-        <button
-          onClick={toggleTheme}
-          className="lg:hidden"
-          style={{
-            marginLeft: "auto",
-            marginRight: "0.5rem",
-            padding: "0.5rem",
-            borderRadius: "8px",
-            background: "var(--color-gray-100)",
-            border: "1px solid var(--color-border)",
-            cursor: "pointer",
-            color: "var(--color-gray-600)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-        >
-          {theme === "dark" ? (
-            <Sun style={{ width: "1.125rem", height: "1.125rem" }} />
-          ) : (
-            <Moon style={{ width: "1.125rem", height: "1.125rem" }} />
-          )}
-        </button>
+        {/* Mobile theme toggle removed */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden"

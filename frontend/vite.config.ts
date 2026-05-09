@@ -18,12 +18,10 @@ export default defineConfig({
   },
   build: {
     target: "ES2020",
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
-    },
+    // use esbuild for minification to avoid terser dependency issues
+    minify: "esbuild",
+    // drop console via esbuild options
+    terserOptions: undefined,
     rollupOptions: {
       output: {
         manualChunks: {

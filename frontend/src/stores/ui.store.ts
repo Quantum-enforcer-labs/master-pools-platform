@@ -9,9 +9,7 @@ interface Notification {
 }
 
 interface UIState {
-  // Theme
-  theme: "dark" | "light";
-  toggleTheme: () => void;
+  // UI state (no theme)
 
   // Chat
   chatOpen: boolean;
@@ -43,37 +41,8 @@ interface UIState {
 }
 
 export const useUIStore = create<UIState>((set, get) => {
-  const initialTheme =
-    typeof window !== "undefined" && localStorage.getItem("theme")
-      ? (localStorage.getItem("theme") as "dark" | "light")
-      : "dark";
-
-  // Apply initial theme class to document for immediate effect
-  if (typeof window !== "undefined") {
-    try {
-      document.documentElement.classList.toggle(
-        "dark",
-        initialTheme === "dark",
-      );
-    } catch (e) {
-      // ignore in non-browser contexts
-    }
-  }
-
   return {
-    theme: initialTheme,
-    toggleTheme: () => {
-      const next = get().theme === "dark" ? "light" : "dark";
-      if (typeof document !== "undefined") {
-        document.documentElement.classList.toggle("dark", next === "dark");
-      }
-      try {
-        localStorage.setItem("theme", next);
-      } catch (e) {
-        // ignore if localStorage unavailable
-      }
-      set({ theme: next });
-    },
+    // theme removed
 
     chatOpen: false,
     activeConversationId: null,

@@ -209,32 +209,7 @@
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DARK MODE THEME OVERRIDES
-═══════════════════════════════════════════════════════════════════════════ */
-
-@dark {
-  :root {
-    --color-bg: #0f1419;
-    --color-card: #1a1f2e;
-    --color-text: #f5f5f5;
-    --color-text-secondary: #b0b4c3;
-    --color-text-tertiary: #8b92a8;
-    --color-border: #2c3544;
-    --color-border-strong: #3d4758;
-  }
-
-  /* Dark-mode scrollbar styles (consolidated) */
-  ::-webkit-scrollbar-track {
-    background: var(--color-gray-700);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-gray-600);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-gray-500);
-  }
-}
+/* Dark mode removed: site uses a single light theme. */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BASE LAYER
@@ -302,17 +277,7 @@
     background: var(--color-gray-400);
   }
 
-  @dark {
-    ::-webkit-scrollbar-track {
-      background: var(--color-gray-700);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--color-gray-600);
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-gray-500);
-    }
-  }
+  /* Dark mode removed: keep default scrollbar for light theme */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

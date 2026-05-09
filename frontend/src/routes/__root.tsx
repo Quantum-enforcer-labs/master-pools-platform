@@ -6,7 +6,7 @@ import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
 import ChatWidget from "../components/ui/ChatWidget";
 import { useAuthStore } from "../stores/auth.store";
-import { useUIStore } from "../stores/ui.store";
+// theme removed from UI store
 
 export const Route = createRootRoute({
   component: RootLayout,
@@ -14,14 +14,11 @@ export const Route = createRootRoute({
 
 function RootLayout() {
   const { isAuthenticated, user } = useAuthStore();
-  const { theme } = useUIStore();
   const isAdmin = user?.role === "admin";
 
   useEffect(() => {
-    // Apply theme to document on mount and when theme changes
-    const isDark = theme === "dark";
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [theme]);
+    // no theme handling required
+  }, []);
 
   return (
     <div
