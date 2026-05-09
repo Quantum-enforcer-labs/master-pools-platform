@@ -7,19 +7,23 @@ let activeSocketToken: string | null = null;
 const env = (import.meta as any)?.env ?? {};
 const defaultProductionSocketUrl = "https://master-pools-platform.onrender.com";
 
+const isLocalDevHost =
+  typeof window !== "undefined" &&
+  ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
 const apiBase =
   typeof env.VITE_API_BASE_URL === "string" && env.VITE_API_BASE_URL.trim()
     ? env.VITE_API_BASE_URL.trim().replace(/\/$/, "")
-    : env.PROD
-      ? `${defaultProductionSocketUrl}/api`
-      : "";
+    : isLocalDevHost
+      ? ""
+      : `${defaultProductionSocketUrl}/api`;
 const derivedSocketUrl = /^https?:\/\//.test(apiBase)
   ? apiBase.replace(/\/api\/?$/, "")
   : "";
 const socketUrl =
   (typeof env.VITE_SOCKET_URL === "string" && env.VITE_SOCKET_URL.trim()) ||
   derivedSocketUrl ||
-  (env.PROD ? defaultProductionSocketUrl : "/");
+  (isLocalDevHost ? "/" : defaultProductionSocketUrl);
 
 export const useSocket = () => {
   const { token, isAuthenticated } = useAuthStore();

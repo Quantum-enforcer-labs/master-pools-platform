@@ -5,12 +5,16 @@ const env = (import.meta as any)?.env ?? {};
 const defaultProductionApiBase =
   "https://master-pools-platform.onrender.com/api";
 
+const isLocalDevHost =
+  typeof window !== "undefined" &&
+  ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
 const baseUrl =
   typeof env.VITE_API_BASE_URL === "string" && env.VITE_API_BASE_URL.trim()
     ? env.VITE_API_BASE_URL.trim().replace(/\/$/, "")
-    : env.PROD
-      ? defaultProductionApiBase
-      : "/api";
+    : isLocalDevHost
+      ? "/api"
+      : defaultProductionApiBase;
 
 const api = axios.create({
   baseURL: baseUrl,
