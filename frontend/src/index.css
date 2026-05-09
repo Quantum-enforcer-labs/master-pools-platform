@@ -223,6 +223,17 @@
     --color-border: #2c3544;
     --color-border-strong: #3d4758;
   }
+
+  /* Dark-mode scrollbar styles (consolidated) */
+  ::-webkit-scrollbar-track {
+    background: var(--color-gray-700);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-gray-600);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-500);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
