@@ -125,6 +125,12 @@ Environment variables:
 - `VITE_API_BASE_URL=https://master-pools-platform.onrender.com/api`
 - `VITE_SOCKET_URL=https://master-pools-platform.onrender.com`
 
+Temporary testing tip:
+
+- If you need to quickly verify cross-origin connectivity while debugging, set this backend env on Render (temporary):
+  - `ALLOW_ALL_ORIGINS=true`
+    This makes the API accept requests from any origin (use only for short-term testing, then unset it).
+
 `frontend/vercel.json` already includes SPA rewrites so client routes work after refresh.
 
 ### Backend on Render
@@ -150,3 +156,4 @@ Recommended backend env vars:
 After deploy, test:
 
 - `https://master-pools-platform.onrender.com/api/health`
+  After deploy, if the frontend still shows CORS errors, set `CLIENT_URL` in the Render service environment to `https://www.masterspools.co.zw`, restart the service, then redeploy the frontend with the `VITE_*` vars above.

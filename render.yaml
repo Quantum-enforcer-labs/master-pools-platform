@@ -20,7 +20,7 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: CLIENT_URL
-        value: https://masterpools.vercel.app
+        value: https://www.masterspools.co.zw
       - key: ALLOW_VERCEL_PREVIEWS
         value: true
       - key: SERVE_FRONTEND

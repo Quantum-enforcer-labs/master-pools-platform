@@ -75,6 +75,10 @@ export default function ProjectsPage() {
     ...(category !== "all" && { category }),
   });
 
+  const projects = data?.projects ?? [];
+  const paginationTotal = data?.pagination?.total ?? 0;
+  const pages = data?.pagination?.pages ?? 0;
+
   const clearFilters = () => {
     setSearch("");
     setStatus("all");
@@ -329,11 +333,11 @@ export default function ProjectsPage() {
               >
                 Showing{" "}
                 <span style={{ color: "var(--color-text)", fontWeight: 700 }}>
-                  {data.projects.length}
+                  {projects.length}
                 </span>{" "}
                 of{" "}
                 <span style={{ color: "var(--color-text)", fontWeight: 700 }}>
-                  {data.pagination.total}
+                  {paginationTotal}
                 </span>{" "}
                 projects
                 {hasFilters && (
@@ -424,7 +428,7 @@ export default function ProjectsPage() {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
             >
-              {data.projects.map((project, i) => (
+              {projects.map((project, i) => (
                 <motion.div
                   key={project._id}
                   initial={{ opacity: 0, y: 10 }}
@@ -600,7 +604,7 @@ export default function ProjectsPage() {
                 gap: "1.5rem",
               }}
             >
-              {data.projects.map((project, i) => (
+              {projects.map((project, i) => (
                 <motion.div
                   key={project._id}
                   initial={{ opacity: 0, y: 16 }}
@@ -614,7 +618,7 @@ export default function ProjectsPage() {
           )}
 
           {/* Pagination */}
-          {data && data.pagination.pages > 1 && (
+          {pages > 1 && (
             <div
               style={{
                 display: "flex",
@@ -632,7 +636,7 @@ export default function ProjectsPage() {
               >
                 Previous
               </button>
-              {Array.from({ length: data.pagination.pages }, (_, i) => (
+              {Array.from({ length: pages }, (_, i) => (
                 <button
                   key={i}
                   onClick={() => setPage(i + 1)}
@@ -660,12 +664,10 @@ export default function ProjectsPage() {
                 </button>
               ))}
               <button
-                onClick={() =>
-                  setPage((p) => Math.min(data.pagination.pages, p + 1))
-                }
-                disabled={page === data.pagination.pages}
+                onClick={() => setPage((p) => Math.min(pages, p + 1))}
+                disabled={page === pages}
                 className="btn btn-secondary btn-sm"
-                style={{ opacity: page === data.pagination.pages ? 0.4 : 1 }}
+                style={{ opacity: page === pages ? 0.4 : 1 }}
               >
                 Next
               </button>
