@@ -3,6 +3,7 @@ import { io, Socket } from "socket.io-client";
 import { useAuthStore } from "../stores/auth.store";
 
 let socketInstance: Socket | null = null;
+let activeSocketToken: string | null = null;
 const env = (import.meta as any)?.env ?? {};
 const defaultProductionSocketUrl = "https://master-pools-platform.onrender.com";
 
@@ -25,13 +26,28 @@ export const useSocket = () => {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated || !token) return;
+    if (!isAuthenticated || !token) {
+      if (socketInstance) {
+        socketInstance.disconnect();
+        socketInstance = null;
+        activeSocketToken = null;
+      }
+      socketRef.current = null;
+      return;
+    }
+
+    if (socketInstance && activeSocketToken !== token) {
+      socketInstance.disconnect();
+      socketInstance = null;
+      activeSocketToken = null;
+    }
 
     if (!socketInstance) {
       socketInstance = io(socketUrl, {
         auth: { token },
         transports: ["websocket", "polling"],
       });
+      activeSocketToken = token;
     }
 
     socketRef.current = socketInstance;
@@ -48,5 +64,6 @@ export const disconnectSocket = () => {
   if (socketInstance) {
     socketInstance.disconnect();
     socketInstance = null;
+    activeSocketToken = null;
   }
 };

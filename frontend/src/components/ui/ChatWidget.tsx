@@ -17,6 +17,7 @@ import {
   useMessages,
   useSendMessage,
 } from "../../hooks/useApi";
+import { useSocket } from "../../hooks/useSocket";
 import { useAuthStore } from "../../stores/auth.store";
 import { useUIStore } from "../../stores/ui.store";
 import type { Conversation, Message } from "../../types";
@@ -32,16 +33,19 @@ export default function ChatWidget() {
   const { chatOpen, setChatOpen, activeConversationId, setActiveConversation } =
     useUIStore();
   const { user } = useAuthStore();
+  const socket = useSocket();
   const [input, setInput] = useState("");
   const [minimized, setMinimized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const { data: convData } = useConversations();
+  const { data: convData, refetch: refetchConversations } = useConversations();
   const conversations: Conversation[] = (convData as any) || [];
   const activeConv = activeConversationId || conversations[0]?._id;
 
-  const { data: msgData, refetch } = useMessages(activeConv || "");
+  const { data: msgData, refetch: refetchMessages } = useMessages(
+    activeConv || "",
+  );
   const messages: Message[] = msgData?.messages || [];
   const { mutate: sendMsg, isPending: sending } = useSendMessage(
     activeConv || "",
@@ -63,6 +67,23 @@ export default function ChatWidget() {
     if (chatOpen && !minimized) setTimeout(scrollToBottom, 300);
   }, [chatOpen, minimized]);
 
+  useEffect(() => {
+    if (!socket) return;
+
+    const refreshChat = () => {
+      refetchConversations();
+      if (activeConv) refetchMessages();
+    };
+
+    socket.on("message:new", refreshChat);
+    socket.on("notification:message", refreshChat);
+
+    return () => {
+      socket.off("message:new", refreshChat);
+      socket.off("notification:message", refreshChat);
+    };
+  }, [socket, activeConv, refetchConversations, refetchMessages]);
+
   const handleSend = () => {
     if (!input.trim() || !activeConv) return;
     sendMsg(
@@ -70,7 +91,7 @@ export default function ChatWidget() {
       {
         onSuccess: () => {
           setInput("");
-          refetch();
+          refetchMessages();
         },
       },
     );
