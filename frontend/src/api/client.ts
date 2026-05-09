@@ -1,7 +1,16 @@
 import axios, { type AxiosError } from "axios";
 import toast from "react-hot-toast";
 
-const baseUrl = (import.meta as any)?.env?.VITE_API_BASE_URL ?? "/api";
+const env = (import.meta as any)?.env ?? {};
+const defaultProductionApiBase =
+  "https://master-pools-platform.onrender.com/api";
+
+const baseUrl =
+  typeof env.VITE_API_BASE_URL === "string" && env.VITE_API_BASE_URL.trim()
+    ? env.VITE_API_BASE_URL.trim().replace(/\/$/, "")
+    : env.PROD
+      ? defaultProductionApiBase
+      : "/api";
 
 const api = axios.create({
   baseURL: baseUrl,

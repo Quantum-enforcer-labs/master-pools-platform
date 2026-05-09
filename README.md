@@ -122,8 +122,8 @@ Build settings:
 
 Environment variables:
 
-- `VITE_API_BASE_URL=https://<your-render-service>.onrender.com/api`
-- `VITE_SOCKET_URL=https://<your-render-service>.onrender.com`
+- `VITE_API_BASE_URL=https://master-pools-platform.onrender.com/api`
+- `VITE_SOCKET_URL=https://master-pools-platform.onrender.com`
 
 `frontend/vercel.json` already includes SPA rewrites so client routes work after refresh.
 
@@ -149,4 +149,4 @@ Recommended backend env vars:
 
 After deploy, test:
 
-- `https://<your-render-service>.onrender.com/api/health`
+- `https://master-pools-platform.onrender.com/api/health`

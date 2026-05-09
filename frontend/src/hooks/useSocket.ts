@@ -4,13 +4,21 @@ import { useAuthStore } from "../stores/auth.store";
 
 let socketInstance: Socket | null = null;
 const env = (import.meta as any)?.env ?? {};
+const defaultProductionSocketUrl = "https://master-pools-platform.onrender.com";
 
 const apiBase =
-  typeof env.VITE_API_BASE_URL === "string" ? env.VITE_API_BASE_URL : "";
+  typeof env.VITE_API_BASE_URL === "string" && env.VITE_API_BASE_URL.trim()
+    ? env.VITE_API_BASE_URL.trim().replace(/\/$/, "")
+    : env.PROD
+      ? `${defaultProductionSocketUrl}/api`
+      : "";
 const derivedSocketUrl = /^https?:\/\//.test(apiBase)
   ? apiBase.replace(/\/api\/?$/, "")
   : "";
-const socketUrl = env.VITE_SOCKET_URL || derivedSocketUrl || "/";
+const socketUrl =
+  (typeof env.VITE_SOCKET_URL === "string" && env.VITE_SOCKET_URL.trim()) ||
+  derivedSocketUrl ||
+  (env.PROD ? defaultProductionSocketUrl : "/");
 
 export const useSocket = () => {
   const { token, isAuthenticated } = useAuthStore();
