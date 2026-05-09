@@ -473,7 +473,9 @@ export default function ProjectsPage() {
                             project.coverImage.thumbnail ||
                             project.coverImage?.url
                           }
-                          alt=""
+                          alt={project.title}
+                          loading="lazy"
+                          decoding="async"
                           style={{
                             width: "100%",
                             height: "100%",

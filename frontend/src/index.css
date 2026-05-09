@@ -1992,3 +1992,136 @@
 .group-hover\:opacity-100 {
   opacity: 0;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY UTILITIES
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Screen reader only - hides visually but keeps available to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus visible for keyboard navigation */
+.focus-visible:focus {
+  outline: 3px solid var(--color-secondary-500);
+  outline-offset: 3px;
+}
+
+/* Skip link styling */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem;
+  background: var(--color-primary-600);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--color-secondary-500);
+  outline-offset: 2px;
+}
+
+/* Reduce motion respect for animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus indicator for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-secondary-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ensure sufficient color contrast */
+body {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Improve link contrast */
+a {
+  color: var(--color-primary-600);
+}
+a:visited {
+  color: var(--color-primary-700);
+}
+
+/* Improved button focus states */
+button {
+  position: relative;
+}
+button:focus-visible::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px solid var(--color-secondary-500);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* Loading states with accessible labels */
+[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Error states with clear visual indication */
+[aria-invalid="true"] {
+  border-color: var(--color-danger) !important;
+}
+
+/* Disabled states */
+[aria-disabled="true"],
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  body {
+    font-weight: 500;
+  }
+
+  button,
+  a {
+    outline-width: 3px;
+  }
+}
+
+/* Light mode specific */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}

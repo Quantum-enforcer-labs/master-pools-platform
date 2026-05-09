@@ -353,7 +353,9 @@ export default function AdminProjects() {
                           {p.coverImage?.thumbnail ? (
                             <img
                               src={p.coverImage.thumbnail}
-                              alt=""
+                              alt={p.title || "Project cover image"}
+                              loading="lazy"
+                              decoding="async"
                               style={{
                                 width: "100%",
                                 height: "100%",
@@ -809,7 +811,9 @@ export default function AdminProjects() {
                         >
                           <img
                             src={coverPreview}
-                            alt=""
+                            alt="Project cover preview"
+                            loading="lazy"
+                            decoding="async"
                             style={{
                               width: "100%",
                               height: "100%",
@@ -912,7 +916,9 @@ export default function AdminProjects() {
                           >
                             <img
                               src={img.thumbnail || img.url}
-                              alt=""
+                              alt={`Gallery image`}
+                              loading="lazy"
+                              decoding="async"
                               style={{
                                 width: "100%",
                                 height: "100%",

@@ -341,6 +341,8 @@ export default function ProjectDetailPage({
             <>
               <button
                 onClick={prevImg}
+                aria-label="Previous image"
+                title="Previous image"
                 style={{
                   position: "absolute",
                   left: "1.5rem",
@@ -370,6 +372,8 @@ export default function ProjectDetailPage({
               </button>
               <button
                 onClick={nextImg}
+                aria-label="Next image"
+                title="Next image"
                 style={{
                   position: "absolute",
                   right: "1.5rem",
@@ -413,6 +417,8 @@ export default function ProjectDetailPage({
           >
             <button
               onClick={() => setLightbox(true)}
+              aria-label="Zoom in gallery"
+              title="Zoom in"
               style={{
                 width: "2.5rem",
                 height: "2.5rem",
@@ -431,6 +437,8 @@ export default function ProjectDetailPage({
             </button>
             <button
               onClick={shareProject}
+              aria-label="Share project"
+              title="Share project"
               style={{
                 width: "2.5rem",
                 height: "2.5rem",
@@ -541,7 +549,9 @@ export default function ProjectDetailPage({
                   >
                     <img
                       src={img.thumbnail || img.url}
-                      alt=""
+                      alt={img.alt || `Pool project image ${i + 1}`}
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         width: "100%",
                         height: "100%",
@@ -1239,7 +1249,10 @@ export default function ProjectDetailPage({
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 src={allImages[activeImg].url}
-                alt=""
+                alt={
+                  allImages[activeImg].alt ||
+                  `${project.title} - Image ${activeImg + 1}`
+                }
                 style={{
                   maxWidth: "88vw",
                   maxHeight: "82vh",
