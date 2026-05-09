@@ -88,12 +88,12 @@ export default function ProjectsPage() {
       <MetaHead
         title="Pool Projects | MATERPOOLS AND CONTRUCTION — Custom & Commercial"
         description="Browse our portfolio of luxury swimming pools, from residential sanctuaries to Olympic-grade aquatic complexes."
-        canonical="https://masterpools.co.zw/projects"
+        canonical="https://www.masterpools.co.zw/projects"
       />
       <StructuredData
         schema={breadcrumbSchema([
-          { name: "Home", url: "https://masterpools.co.zw/" },
-          { name: "Projects", url: "https://masterpools.co.zw/projects" },
+          { name: "Home", url: "https://www.masterpools.co.zw/" },
+          { name: "Projects", url: "https://www.masterpools.co.zw/projects" },
         ])}
       />
       <div

@@ -20,8 +20,8 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "MATERPOOLS AND CONTRUCTION",
-  url: "https://masterpools.co.zw",
-  logo: "https://masterpools.co.zw/logo.svg",
+  url: "https://www.masterpools.co.zw",
+  logo: "https://www.masterpools.co.zw/logo.svg",
   description:
     "Zimbabwe's most trusted luxury swimming pool construction company",
   telephone: "+263772562125",
@@ -37,7 +37,7 @@ export const organizationSchema = {
   ],
   areaServed: "ZW",
   priceRange: "$$$",
-  image: "https://masterpools.co.zw/og-image.png",
+  image: "https://www.masterpools.co.zw/og-image.png",
 };
 
 export function organizationSchemaWithFAQ(
@@ -72,7 +72,7 @@ export function projectSchema(project: {
     "@type": "CreativeWork",
     name: project.title,
     description: project.description,
-    image: project.image || "https://masterpools.co.zw/default-project.png",
+    image: project.image || "https://www.masterpools.co.zw/default-project.png",
     category: project.category,
     author: {
       "@type": "Organization",

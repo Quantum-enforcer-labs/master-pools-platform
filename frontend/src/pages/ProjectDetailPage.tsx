@@ -194,9 +194,10 @@ export default function ProjectDetailPage({
           "View this stunning pool project by MATERPOOLS AND CONTRUCTION."
         }
         ogImage={
-          project?.coverImage?.url || "https://masterpools.co.zw/og-image.png"
+          project?.coverImage?.url ||
+          "https://www.masterpools.co.zw/og-image.png"
         }
-        canonical={`https://masterpools.co.zw/projects/${projectId}`}
+        canonical={`https://www.masterpools.co.zw/projects/${projectId}`}
       />
       {project && (
         <StructuredData
@@ -213,11 +214,11 @@ export default function ProjectDetailPage({
       )}
       <StructuredData
         schema={breadcrumbSchema([
-          { name: "Home", url: "https://masterpools.co.zw/" },
-          { name: "Projects", url: "https://masterpools.co.zw/projects" },
+          { name: "Home", url: "https://www.masterpools.co.zw/" },
+          { name: "Projects", url: "https://www.masterpools.co.zw/projects" },
           {
             name: project?.title || "Project",
-            url: `https://masterpools.co.zw/projects/${projectId}`,
+            url: `https://www.masterpools.co.zw/projects/${projectId}`,
           },
         ])}
       />

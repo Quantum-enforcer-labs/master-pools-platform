@@ -70,13 +70,13 @@ export default function ContactPage() {
       <MetaHead
         title="Contact MATERPOOLS AND CONTRUCTION | Get Your Dream Pool Quote"
         description="Get in touch with our expert team for a free consultation and custom pool quotation."
-        canonical="https://masterpools.co.zw/contact"
+        canonical="https://www.masterpools.co.zw/contact"
       />
       <StructuredData schema={organizationSchema} />
       <StructuredData
         schema={breadcrumbSchema([
-          { name: "Home", url: "https://masterpools.co.zw/" },
-          { name: "Contact", url: "https://masterpools.co.zw/contact" },
+          { name: "Home", url: "https://www.masterpools.co.zw/" },
+          { name: "Contact", url: "https://www.masterpools.co.zw/contact" },
         ])}
       />
       <div

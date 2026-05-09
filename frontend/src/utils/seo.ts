@@ -34,7 +34,7 @@ export const COMPANY_NAME = "MATERPOOLS AND CONTRUCTION";
 export const COMPANY_PHONE = "+263 772 562 125";
 export const COMPANY_PHONE_2 = "+263 775 206 774";
 export const COMPANY_ADDRESS = "Harare, Zimbabwe";
-export const COMPANY_URL = "https://masterpools.co.zw";
+export const COMPANY_URL = "https://www.masterpools.co.zw";
 
 export const metaConfigs = {
   home: createMetaTags({

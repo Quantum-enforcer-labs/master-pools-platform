@@ -98,13 +98,13 @@ export default function AboutPage() {
       <MetaHead
         title="About MATERPOOLS AND CONTRUCTION | Zimbabwe's Pool Construction Leaders"
         description="Learn about MATERPOOLS AND CONTRUCTION' 20+ years of expertise in luxury pool design and construction."
-        canonical="https://masterpools.co.zw/about"
+        canonical="https://www.masterpools.co.zw/about"
       />
       <StructuredData schema={organizationSchema} />
       <StructuredData
         schema={breadcrumbSchema([
-          { name: "Home", url: "https://masterpools.co.zw/" },
-          { name: "About", url: "https://masterpools.co.zw/about" },
+          { name: "Home", url: "https://www.masterpools.co.zw/" },
+          { name: "About", url: "https://www.masterpools.co.zw/about" },
         ])}
       />
       <div style={{ minHeight: "100vh", background: "var(--color-bg)" }}>
@@ -164,10 +164,10 @@ export default function AboutPage() {
                   marginBottom: "2.5rem",
                 }}
               >
-                MATERPOOLS AND CONTRUCTION was founded in 2014 with a single mission: to bring
-                world-class aquatic construction to Zimbabwe. From our first
-                residential pool in Harare to major resort complexes, our
-                commitment to excellence has never wavered.
+                MATERPOOLS AND CONTRUCTION was founded in 2014 with a single
+                mission: to bring world-class aquatic construction to Zimbabwe.
+                From our first residential pool in Harare to major resort
+                complexes, our commitment to excellence has never wavered.
               </p>
               <div
                 style={{
@@ -297,9 +297,10 @@ export default function AboutPage() {
                   marginBottom: "1.25rem",
                 }}
               >
-                At MATERPOOLS AND CONTRUCTION, we believe a swimming pool is more than just a
-                structure — it's a centrepiece of life, a place for families to
-                bond, athletes to train, and individuals to find peace.
+                At MATERPOOLS AND CONTRUCTION, we believe a swimming pool is
+                more than just a structure — it's a centrepiece of life, a place
+                for families to bond, athletes to train, and individuals to find
+                peace.
               </p>
               <p
                 style={{
