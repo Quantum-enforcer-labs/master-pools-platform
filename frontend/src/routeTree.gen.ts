@@ -32,6 +32,7 @@ import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminReviewsRouteImport } from './routes/admin/reviews'
 import { Route as AdminQuotationsRouteImport } from './routes/admin/quotations'
 import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
+import { Route as AdminNewsletterRouteImport } from './routes/admin/newsletter'
 import { Route as AdminContactsRouteImport } from './routes/admin/contacts'
 import { Route as AdminChatRouteImport } from './routes/admin/chat'
 
@@ -150,6 +151,11 @@ const AdminProjectsRoute = AdminProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminNewsletterRoute = AdminNewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminContactsRoute = AdminContactsRouteImport.update({
   id: '/contacts',
   path: '/contacts',
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/verify-otp': typeof VerifyOtpRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/quotations': typeof AdminQuotationsRoute
   '/admin/reviews': typeof AdminReviewsRoute
@@ -204,6 +211,7 @@ export interface FileRoutesByTo {
   '/verify-otp': typeof VerifyOtpRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/quotations': typeof AdminQuotationsRoute
   '/admin/reviews': typeof AdminReviewsRoute
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/verify-otp': typeof VerifyOtpRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
+  '/admin/newsletter': typeof AdminNewsletterRoute
   '/admin/projects': typeof AdminProjectsRoute
   '/admin/quotations': typeof AdminQuotationsRoute
   '/admin/reviews': typeof AdminReviewsRoute
@@ -261,6 +270,7 @@ export interface FileRouteTypes {
     | '/verify-otp'
     | '/admin/chat'
     | '/admin/contacts'
+    | '/admin/newsletter'
     | '/admin/projects'
     | '/admin/quotations'
     | '/admin/reviews'
@@ -286,6 +296,7 @@ export interface FileRouteTypes {
     | '/verify-otp'
     | '/admin/chat'
     | '/admin/contacts'
+    | '/admin/newsletter'
     | '/admin/projects'
     | '/admin/quotations'
     | '/admin/reviews'
@@ -313,6 +324,7 @@ export interface FileRouteTypes {
     | '/verify-otp'
     | '/admin/chat'
     | '/admin/contacts'
+    | '/admin/newsletter'
     | '/admin/projects'
     | '/admin/quotations'
     | '/admin/reviews'
@@ -504,6 +516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProjectsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/newsletter': {
+      id: '/admin/newsletter'
+      path: '/newsletter'
+      fullPath: '/admin/newsletter'
+      preLoaderRoute: typeof AdminNewsletterRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/contacts': {
       id: '/admin/contacts'
       path: '/contacts'
@@ -524,6 +543,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminChatRoute: typeof AdminChatRoute
   AdminContactsRoute: typeof AdminContactsRoute
+  AdminNewsletterRoute: typeof AdminNewsletterRoute
   AdminProjectsRoute: typeof AdminProjectsRoute
   AdminQuotationsRoute: typeof AdminQuotationsRoute
   AdminReviewsRoute: typeof AdminReviewsRoute
@@ -535,6 +555,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminChatRoute: AdminChatRoute,
   AdminContactsRoute: AdminContactsRoute,
+  AdminNewsletterRoute: AdminNewsletterRoute,
   AdminProjectsRoute: AdminProjectsRoute,
   AdminQuotationsRoute: AdminQuotationsRoute,
   AdminReviewsRoute: AdminReviewsRoute,

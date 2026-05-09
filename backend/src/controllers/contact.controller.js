@@ -1,3 +1,7 @@
+import {
+  renderContactConfirmation,
+  renderContactNotification,
+} from "../emails/templates.js";
 import { Contact } from "../models/Review.model.js";
 import { sendFromPlatform, sendToPlatform } from "../utils/email.service.js";
 
@@ -11,20 +15,23 @@ export const submitContact = async (req, res) => {
     message,
   });
 
-  if (process.env.EMAIL_USER) {
-    // Send internal notification to platform inbox via Nodemailer
+  const inboxEmail = process.env.ADMIN_EMAIL || process.env.EMAIL_USER;
+
+  if (inboxEmail) {
+    // Send internal notification to platform inbox via Nodemailer using branded template
     sendToPlatform({
-      to: process.env.EMAIL_USER,
+      to: inboxEmail,
       subject: `[MATERPOOLS AND CONTRUCTION] New Contact: ${subject}`,
-      html: `<h2>New Contact</h2><p><b>Name:</b> ${name}</p><p><b>Email:</b> ${email}</p><p><b>Phone:</b> ${phone || "N/A"}</p><p><b>Subject:</b> ${subject}</p><p>${message}</p>`,
+      html: renderContactNotification({ name, email, phone, subject, message }),
       from: process.env.EMAIL_FROM,
+      replyTo: email,
     }).catch(console.error);
 
-    // Send confirmation to user using Resend (transactional provider)
+    // Send confirmation to user using Resend (transactional provider) with branded template
     sendFromPlatform({
       to: email,
       subject: "Thank you for contacting MATERPOOLS AND CONTRUCTION",
-      html: `<h2>Thank you, ${name}!</h2><p>We received your message and will reply within 24 hours.</p><p>Reference: <b>${contact._id}</b></p><br/><p>MATERPOOLS AND CONTRUCTION Team</p>`,
+      html: renderContactConfirmation(name, String(contact._id)),
       from: process.env.RESEND_FROM || process.env.EMAIL_FROM,
     }).catch((err) => {
       // If Resend fails, fallback to Nodemailer for the confirmation
@@ -32,7 +39,7 @@ export const submitContact = async (req, res) => {
       sendToPlatform({
         to: email,
         subject: "Thank you for contacting MATERPOOLS AND CONTRUCTION",
-        html: `<h2>Thank you, ${name}!</h2><p>We received your message and will reply within 24 hours.</p><p>Reference: <b>${contact._id}</b></p><br/><p>MATERPOOLS AND CONTRUCTION Team</p>`,
+        html: renderContactConfirmation(name, String(contact._id)),
         from: process.env.EMAIL_FROM,
       }).catch(console.error);
     });

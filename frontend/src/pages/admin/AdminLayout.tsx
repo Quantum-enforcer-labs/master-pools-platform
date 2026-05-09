@@ -37,6 +37,7 @@ const NAV = [
   { to: "/admin/reviews", label: "Reviews", icon: Star },
   { to: "/admin/videos", label: "Videos", icon: Play },
   { to: "/admin/contacts", label: "Messages", icon: Mail },
+  { to: "/admin/newsletter", label: "Newsletter", icon: Mail },
 ];
 
 export default function AdminLayout() {

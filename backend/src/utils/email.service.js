@@ -10,12 +10,13 @@ const createTransporter = () =>
       : undefined,
   });
 
-export async function sendToPlatform({ to, subject, html, from }) {
+export async function sendToPlatform({ to, subject, html, from, replyTo }) {
   try {
     const transporter = createTransporter();
     const info = await transporter.sendMail({
       from: from || process.env.EMAIL_FROM,
       to: to || process.env.EMAIL_USER,
+      ...(replyTo ? { replyTo } : {}),
       subject,
       html,
     });

@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Linkedin, Phone, Twitter } from "lucide-react";
+import NewsletterSignup from "../ui/NewsletterSignup";
 
 import { Link } from "@tanstack/react-router";
 
@@ -340,6 +341,25 @@ export default function Footer() {
             >
               Book Consultation
             </Link>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <p
+              style={{
+                fontSize: "0.6875rem",
+                fontWeight: 700,
+                color: "var(--color-text-tertiary)",
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                marginBottom: "1rem",
+              }}
+            >
+              Newsletter
+            </p>
+            <div>
+              <NewsletterSignup />
+            </div>
           </div>
         </div>
 
