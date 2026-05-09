@@ -46,41 +46,39 @@ export default function VideoCarousel({ videos, className = "" }: Props) {
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="mx-auto max-w-6xl">
-        <div className="relative h-64 overflow-hidden rounded-4xl border border-slate-200 bg-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.25)] sm:h-80 lg:h-96">
-          <video
-            key={currentVideo.src}
-            ref={videoRef}
-            src={currentVideo.src}
-            autoPlay
-            muted
-            playsInline
-            controls={false}
-            onEnded={nextVideo}
-            className="h-full w-full object-contain"
-          />
+      <div className="relative h-64 overflow-hidden rounded-4xl border border-slate-200 bg-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.25)] sm:h-80 lg:h-96">
+        <video
+          key={currentVideo.src}
+          ref={videoRef}
+          src={currentVideo.src}
+          autoPlay
+          muted
+          playsInline
+          controls={false}
+          onEnded={nextVideo}
+          className="h-full w-full object-contain"
+        />
 
-          <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent" />
 
-          <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 sm:inset-x-6 sm:bottom-6">
-            <div className="flex shrink-0 items-center gap-2">
-              <button
-                type="button"
-                aria-label="Previous video"
-                onClick={prevVideo}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/20"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next video"
-                onClick={nextVideo}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/20"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
+        <div className="absolute inset-x-4 bottom-4 flex items-center justify-between gap-3 sm:inset-x-6 sm:bottom-6">
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              aria-label="Previous video"
+              onClick={prevVideo}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/20"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              aria-label="Next video"
+              onClick={nextVideo}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/20"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>
