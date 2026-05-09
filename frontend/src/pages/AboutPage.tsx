@@ -98,13 +98,13 @@ export default function AboutPage() {
       <MetaHead
         title="About MATERPOOLS AND CONTRUCTION | Zimbabwe's Pool Construction Leaders"
         description="Learn about MATERPOOLS AND CONTRUCTION' 20+ years of expertise in luxury pool design and construction."
-        canonical="https://www.masterpools.co.zw/about"
+        canonical="https://www.masterspools.co.zw/about"
       />
       <StructuredData schema={organizationSchema} />
       <StructuredData
         schema={breadcrumbSchema([
-          { name: "Home", url: "https://www.masterpools.co.zw/" },
-          { name: "About", url: "https://www.masterpools.co.zw/about" },
+          { name: "Home", url: "https://www.masterspools.co.zw/" },
+          { name: "About", url: "https://www.masterspools.co.zw/about" },
         ])}
       />
       <div style={{ minHeight: "100vh", background: "var(--color-bg)" }}>

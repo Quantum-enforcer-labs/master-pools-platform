@@ -40,11 +40,11 @@ services:
       - key: EMAIL_PASS
         sync: false
       - key: EMAIL_FROM
-        value: noreply@masterpools.co.zw
+        value: noreply@masterspools.co.zw
       - key: RESEND_API_KEY
         sync: false
       - key: RESEND_FROM
-        value: noreply@masterpools.co.zw
+        value: noreply@masterspools.co.zw
       - key: ADMIN_EMAIL
         sync: false
       - key: ADMIN_PASSWORD

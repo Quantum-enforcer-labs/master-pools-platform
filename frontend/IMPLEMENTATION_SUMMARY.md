@@ -283,7 +283,7 @@ chmod +x audit.sh
 ./audit.sh
 
 # Run Lighthouse audit (requires Chrome)
-lighthouse https://masterpools.co.zw --view
+lighthouse https://www.masterspools.co.zw --view
 ```
 
 ## 🎓 Learning Resources

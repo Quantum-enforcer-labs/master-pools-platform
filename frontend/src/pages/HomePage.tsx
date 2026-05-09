@@ -361,9 +361,9 @@ export default function HomePage() {
       <MetaHead
         title="MATERPOOLS AND CONTRUCTION | Luxury Swimming Pools — Zimbabwe"
         description="Zimbabwe's most trusted luxury swimming pool construction company. Custom design, expert construction, lifetime support."
-        ogImage="https://www.masterpools.co.zw/og-image.png"
+        ogImage="https://www.masterspools.co.zw/og-image.png"
         ogType="website"
-        canonical="https://www.masterpools.co.zw/"
+        canonical="https://www.masterspools.co.zw/"
       />
       <StructuredData schema={organizationSchema} />
       <div style={{ overflowX: "hidden" }}>

@@ -182,8 +182,8 @@ npm install -g @axe-core/cli
 npm install -g lighthouse
 
 # Run tests
-axe https://masterpools.co.zw
-lighthouse https://masterpools.co.zw --view
+axe https://www.masterspools.co.zw
+lighthouse https://www.masterspools.co.zw --view
 ```
 
 ## Common Issues and Fixes
