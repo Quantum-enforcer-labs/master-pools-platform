@@ -578,7 +578,7 @@ export default function HomePage() {
                   label: "Pools Completed",
                 },
                 {
-                  value: stats?.ongoing ?? 12,
+                  value: stats?.ongoing ?? 10,
                   suffix: "",
                   label: "Active Projects",
                 },
