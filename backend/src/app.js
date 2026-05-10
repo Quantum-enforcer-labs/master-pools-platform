@@ -97,10 +97,21 @@ if (
   process.env.SERVE_FRONTEND === "true"
 ) {
   const clientBuildPath = path.resolve(process.cwd(), "../frontend/dist");
-  app.use(express.static(clientBuildPath));
+  app.use(
+    express.static(clientBuildPath, {
+      maxAge: "1y",
+      immutable: true,
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith("index.html")) {
+          res.setHeader("Cache-Control", "no-cache");
+        }
+      },
+    }),
+  );
 
   app.use((req, res, next) => {
     if (req.method === "GET" && !req.path.startsWith("/api")) {
+      res.setHeader("Cache-Control", "no-cache");
       return res.sendFile(path.join(clientBuildPath, "index.html"));
     }
 

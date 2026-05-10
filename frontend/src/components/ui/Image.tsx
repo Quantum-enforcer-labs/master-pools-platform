@@ -4,6 +4,7 @@ interface OptimizedImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   alt: string;
   lazy?: boolean;
+  priority?: boolean;
   aspectRatio?: number;
   sizes?: string;
   srcSet?: string;
@@ -16,6 +17,7 @@ export default function OptimizedImage({
   src,
   alt,
   lazy = true,
+  priority = false,
   aspectRatio,
   sizes,
   srcSet,
@@ -31,11 +33,12 @@ export default function OptimizedImage({
     <img
       src={src}
       alt={alt}
-      loading={lazy ? "lazy" : "eager"}
+      loading={priority ? "eager" : lazy ? "lazy" : "eager"}
       decoding="async"
       sizes={sizes}
       srcSet={srcSet}
-      style={containerStyle}
+      fetchPriority={priority ? "high" : props.fetchPriority}
+      style={{ ...containerStyle, display: "block" }}
       {...props}
     />
   );

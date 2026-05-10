@@ -90,14 +90,14 @@ export default function Navbar() {
         boxShadow: scrolled
           ? "0 1px 0 rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04)"
           : "none",
-        padding: scrolled ? "0" : "0",
       }}
     >
       <div
         style={{
           maxWidth: "80rem",
           margin: "0 auto",
-          padding: "0 1.5rem",
+          width: "100%",
+          padding: "0 clamp(0.875rem, 4vw, 1.5rem)",
           display: "flex",
           alignItems: "center",
           gap: "0.5rem",
@@ -117,8 +117,8 @@ export default function Navbar() {
         >
           <div
             style={{
-              width: "2.75rem",
-              height: "2.75rem",
+              width: "3rem",
+              height: "3rem",
               borderRadius: "50%",
               overflow: "hidden",
               border: "1px solid var(--color-border)",
@@ -130,6 +130,10 @@ export default function Navbar() {
             <img
               src="/images/logo.jpeg"
               alt="MATERPOOLS AND CONTRUCTION logo"
+              width={48}
+              height={48}
+              loading="eager"
+              decoding="async"
               style={{
                 width: "100%",
                 height: "100%",
@@ -143,7 +147,6 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav
           style={{
-            display: "none",
             alignItems: "center",
             gap: "0.125rem",
             flex: 1,
@@ -155,6 +158,9 @@ export default function Navbar() {
               key={to}
               to={to}
               style={{
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
                 padding: "0.4375rem 0.875rem",
                 fontSize: "0.875rem",
                 borderRadius: "8px",
@@ -208,7 +214,6 @@ export default function Navbar() {
         {/* Right actions */}
         <div
           style={{
-            display: "none",
             alignItems: "center",
             gap: "0.375rem",
             marginLeft: "auto",
@@ -588,8 +593,14 @@ export default function Navbar() {
 
         {/* Mobile theme toggle removed */}
         <button
+          type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="lg:hidden"
+          aria-label={
+            mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
           style={{
             marginLeft: "auto",
             padding: "0.5rem",
@@ -614,6 +625,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

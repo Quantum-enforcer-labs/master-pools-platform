@@ -560,7 +560,6 @@ export default function HomePage() {
               {...fadeUp(0.45)}
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
                 gap: "0",
                 background: "rgba(255,255,255,0.08)",
                 border: "1px solid rgba(255,255,255,0.15)",
@@ -569,6 +568,7 @@ export default function HomePage() {
                 maxWidth: "44rem",
                 margin: "0 auto",
               }}
+              className="grid-mobile-1-4"
             >
               {[
                 {
@@ -743,12 +743,12 @@ export default function HomePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
                 gap: "1.25rem",
                 maxWidth: "1100px",
                 margin: "0 auto",
                 justifyItems: "center",
               }}
+              className="grid-mobile-1-3"
             >
               {SERVICES.map(({ icon: Icon, title, desc }, i) => (
                 <motion.div
@@ -1063,9 +1063,9 @@ export default function HomePage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))",
                   gap: "1.5rem",
                 }}
+                className="grid-mobile-1-3"
               >
                 {Array.from({ length: 6 }, (_, i) => (
                   <div
@@ -1079,9 +1079,9 @@ export default function HomePage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))",
                   gap: "1.5rem",
                 }}
+                className="grid-mobile-1-3"
               >
                 {(featured ?? []).map((project, i) => (
                   <motion.div key={project._id} {...fadeUp(i * 0.07)}>
@@ -1172,9 +1172,9 @@ export default function HomePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(280px,1fr))",
                 gap: "1.25rem",
               }}
+              className="grid-mobile-1-3"
             >
               {WHY_US.map(({ icon: Icon, title, desc, color }, i) => {
                 const c = colorCardMap[color] || colorCardMap.blue;
@@ -1250,7 +1250,6 @@ export default function HomePage() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                 gap: "2rem",
                 position: "relative",
                 justifyContent: "center",
@@ -1258,6 +1257,7 @@ export default function HomePage() {
                 maxWidth: "1000px",
                 margin: "0 auto",
               }}
+              className="grid-mobile-1-4"
             >
               {/* Connector line */}
               <div

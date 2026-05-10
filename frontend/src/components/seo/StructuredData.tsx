@@ -21,7 +21,7 @@ export const organizationSchema = {
   "@type": "LocalBusiness",
   name: "MATERPOOLS AND CONTRUCTION",
   url: "https://www.masterspools.co.zw",
-  logo: "https://www.masterspools.co.zw/logo.svg",
+  logo: "https://www.masterspools.co.zw/images/logo.jpeg",
   description:
     "Zimbabwe's most trusted luxury swimming pool construction company",
   telephone: "+263772562125",

@@ -394,11 +394,10 @@ export default function QuotationPage() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(2,1fr)",
                     gap: "0.875rem",
                     marginBottom: "2rem",
                   }}
-                  className="sm:grid-cols-4"
+                  className="grid-mobile-1-4"
                 >
                   {POOL_TYPES.map((t) => (
                     <label
@@ -562,10 +561,10 @@ export default function QuotationPage() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(3,1fr)",
                     gap: "1rem",
                     marginBottom: "2rem",
                   }}
+                  className="grid-mobile-1-3"
                 >
                   {[
                     { f: "length", l: "Length (m)", p: "e.g. 10" },
@@ -622,12 +621,12 @@ export default function QuotationPage() {
                   </p>
                 </div>
 
-                <div style={{ display: "flex", gap: "1rem" }}>
+                <div className="stack-mobile" style={{ gap: "1rem" }}>
                   <button
                     type="button"
                     onClick={() => setStep(0)}
                     className="btn btn-secondary btn-lg"
-                    style={{ flex: 1, justifyContent: "center" }}
+                    style={{ justifyContent: "center" }}
                   >
                     <ArrowLeft
                       style={{ width: "1.125rem", height: "1.125rem" }}
@@ -638,7 +637,7 @@ export default function QuotationPage() {
                     type="button"
                     onClick={() => setStep(2)}
                     className="btn btn-primary btn-lg"
-                    style={{ flex: 1, justifyContent: "center" }}
+                    style={{ justifyContent: "center" }}
                   >
                     Next: Features{" "}
                     <ArrowRight
@@ -685,11 +684,10 @@ export default function QuotationPage() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(2,1fr)",
                     gap: "0.625rem",
                     marginBottom: "2rem",
                   }}
-                  className="sm:grid-cols-3"
+                  className="grid-mobile-1-3"
                 >
                   {POOL_FEATURES.map((f) => {
                     const sel = selectedFeatures.includes(f);
@@ -827,9 +825,9 @@ export default function QuotationPage() {
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
                       gap: "1rem",
                     }}
+                    className="grid-mobile-1-2"
                   >
                     <div>
                       <label className="label">City</label>
@@ -866,9 +864,9 @@ export default function QuotationPage() {
                     <div
                       style={{
                         display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
                         gap: "1rem",
                       }}
+                      className="grid-mobile-1-2"
                     >
                       <input
                         type="number"
@@ -919,12 +917,12 @@ export default function QuotationPage() {
                     />
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: "1rem" }}>
+                <div className="stack-mobile" style={{ gap: "1rem" }}>
                   <button
                     type="button"
                     onClick={() => setStep(2)}
                     className="btn btn-secondary btn-lg"
-                    style={{ flex: 1, justifyContent: "center" }}
+                    style={{ justifyContent: "center" }}
                   >
                     <ArrowLeft
                       style={{ width: "1.125rem", height: "1.125rem" }}
@@ -935,7 +933,7 @@ export default function QuotationPage() {
                     type="button"
                     onClick={() => setStep(4)}
                     className="btn btn-primary btn-lg"
-                    style={{ flex: 1, justifyContent: "center" }}
+                    style={{ justifyContent: "center" }}
                   >
                     Review Request{" "}
                     <ArrowRight
@@ -981,9 +979,9 @@ export default function QuotationPage() {
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
                       gap: "1.25rem",
                     }}
+                    className="grid-mobile-1-2"
                   >
                     {[
                       ["Pool Type", watch("poolType")],

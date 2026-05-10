@@ -46,7 +46,7 @@ export default function Footer() {
           }}
         >
           {/* Brand */}
-          <div style={{ gridColumn: "span 2" }}>
+          <div style={{ gridColumn: "auto" }} className="lg:col-span-2">
             <Link
               to="/"
               style={{
@@ -71,6 +71,10 @@ export default function Footer() {
                 <img
                   src="/images/logo.jpeg"
                   alt="MATERPOOLS AND CONTRUCTION logo"
+                  width={44}
+                  height={44}
+                  loading="eager"
+                  decoding="async"
                   style={{
                     width: "100%",
                     height: "100%",

@@ -99,6 +99,15 @@ export const getVideos = async (req, res) => {
     const query = active === "true" ? { active: true } : {};
     const videos = await Video.find(query).sort({ order: 1, createdAt: -1 });
 
+    if (active === "true") {
+      res.set(
+        "Cache-Control",
+        "public, max-age=300, stale-while-revalidate=86400",
+      );
+    } else {
+      res.set("Cache-Control", "no-store");
+    }
+
     res.json({
       success: true,
       count: videos.length,

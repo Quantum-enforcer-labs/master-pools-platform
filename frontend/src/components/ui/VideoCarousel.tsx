@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 export type VideoSlide = {
   src: string;
+  thumbnail?: string;
+  title?: string;
 };
 
 type Props = {
@@ -51,12 +53,14 @@ export default function VideoCarousel({ videos, className = "" }: Props) {
           key={currentVideo.src}
           ref={videoRef}
           src={currentVideo.src}
+          poster={currentVideo.thumbnail}
           autoPlay
           muted
           playsInline
           controls={false}
+          preload="metadata"
           onEnded={nextVideo}
-          className="h-full w-full object-contain"
+          className="h-full w-full object-cover"
         />
 
         <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent" />

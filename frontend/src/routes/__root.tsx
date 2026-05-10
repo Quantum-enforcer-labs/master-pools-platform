@@ -1,6 +1,4 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
-
-import { useEffect } from "react";
 import SkipLink from "../components/a11y/SkipLink";
 import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
@@ -16,10 +14,6 @@ function RootLayout() {
   const { isAuthenticated, user } = useAuthStore();
   const isAdmin = user?.role === "admin";
 
-  useEffect(() => {
-    // no theme handling required
-  }, []);
-
   return (
     <div
       style={{
@@ -27,6 +21,8 @@ function RootLayout() {
         display: "flex",
         flexDirection: "column",
         background: "var(--color-bg)",
+        width: "100%",
+        overflowX: "clip",
       }}
     >
       <SkipLink />

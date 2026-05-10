@@ -224,9 +224,14 @@
     padding: 0;
   }
 
+  * {
+    min-width: 0;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -237,6 +242,13 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100dvh;
     line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100dvh;
+    overflow-x: clip;
   }
 
   h1,
@@ -253,6 +265,26 @@
   ::selection {
     background-color: rgba(99, 102, 241, 0.15);
     color: var(--color-primary-900);
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  img,
+  video {
+    height: auto;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 
   :focus-visible {
@@ -897,14 +929,20 @@
   .container-xl {
     max-width: 80rem;
     margin: 0 auto;
+    width: 100%;
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
   }
   .container-lg {
     max-width: 72rem;
     margin: 0 auto;
+    width: 100%;
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
   }
   .container-md {
     max-width: 56rem;
     margin: 0 auto;
+    width: 100%;
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
   }
 
   /* ── Toggle switch ─────────────────────────────────────────────────── */
@@ -1619,6 +1657,59 @@
 @media (min-width: 1280px) {
   .xl\:grid-cols-5 {
     grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.grid-mobile-1-2 {
+  grid-template-columns: 1fr;
+}
+
+.grid-mobile-1-3 {
+  grid-template-columns: 1fr;
+}
+
+.grid-mobile-1-4 {
+  grid-template-columns: 1fr;
+}
+
+.stack-mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-mobile > * {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .grid-mobile-1-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-mobile-1-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-mobile-1-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stack-mobile {
+    flex-direction: row;
+  }
+
+  .stack-mobile > * {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-mobile-1-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-mobile-1-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

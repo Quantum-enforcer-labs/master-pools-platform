@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import type { Project } from "../../types";
 import { cn } from "../../utils/cn";
+import OptimizedImage from "./Image";
 
 const STATUS_MAP = {
   completed: { label: "Completed", cls: "badge badge-green" },
@@ -59,11 +60,12 @@ export default function ProjectCard({
         {/* Image area */}
         <div className="relative h-52 bg-gray-100 overflow-hidden shrink-0">
           {coverUrl ? (
-            <img
+            <OptimizedImage
               src={coverUrl}
               alt={project.coverImage?.alt || project.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
+              lazy
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-200">

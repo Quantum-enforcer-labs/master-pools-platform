@@ -13,6 +13,10 @@ interface MetaHeadProps {
   ogDescription?: string;
   ogImage?: string;
   ogType?: string;
+  siteName?: string;
+  twitterCard?: string;
+  twitterSite?: string;
+  themeColor?: string;
   noindex?: boolean;
 }
 
@@ -24,39 +28,49 @@ export function MetaHead({
   ogDescription,
   ogImage,
   ogType = "website",
+  siteName = "MATERPOOLS AND CONTRUCTION",
+  twitterCard = "summary_large_image",
+  twitterSite = "@masterspools",
+  themeColor = "#1e3a8a",
   noindex = false,
 }: MetaHeadProps) {
   useEffect(() => {
-    // Update title
     if (title) {
       document.title = title;
       updateMetaTag("og:title", ogTitle || title);
+      updateMetaTag("twitter:title", ogTitle || title);
     }
 
-    // Update description
     if (description) {
       updateMetaTag("description", description);
       updateMetaTag("og:description", ogDescription || description);
+      updateMetaTag("twitter:description", ogDescription || description);
     }
 
-    // Update og:type
     updateMetaTag("og:type", ogType);
+    updateMetaTag("og:site_name", siteName);
+    updateMetaTag("og:url", canonical || window.location.href);
+    updateMetaTag("twitter:card", twitterCard);
+    updateMetaTag("twitter:url", canonical || window.location.href);
+    updateMetaTag("twitter:site", twitterSite);
+    updateMetaTag("twitter:creator", twitterSite);
+    updateMetaTag("application-name", siteName);
+    updateMetaTag("apple-mobile-web-app-title", siteName);
+    updateMetaTag("theme-color", themeColor);
 
-    // Update og:image
     if (ogImage) {
       updateMetaTag("og:image", ogImage);
+      updateMetaTag("twitter:image", ogImage);
       updateMetaTag("og:image:width", "1200");
       updateMetaTag("og:image:height", "630");
     }
 
-    // Update canonical
     if (canonical) {
       updateCanonical(canonical);
     } else {
       updateCanonical(window.location.href);
     }
 
-    // Update noindex
     if (noindex) {
       updateMetaTag("robots", "noindex, nofollow");
     } else {
@@ -70,6 +84,10 @@ export function MetaHead({
     ogDescription,
     ogImage,
     ogType,
+    siteName,
+    twitterCard,
+    twitterSite,
+    themeColor,
     noindex,
   ]);
 
@@ -95,7 +113,9 @@ function updateMetaTag(name: string, content: string) {
 }
 
 function removeMetaTag(name: string) {
-  const tag = document.querySelector(`meta[name="${name}"]`);
+  const tag = document.querySelector(
+    `meta[name="${name}"], meta[property="${name}"]`,
+  );
   if (tag) {
     tag.remove();
   }
