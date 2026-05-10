@@ -127,3 +127,59 @@ export function breadcrumbSchema(items: Array<{ name: string; url: string }>) {
     })),
   };
 }
+
+export function blogPostSchema(post: {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  author?: string;
+  datePublished?: string;
+  dateModified?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    mainEntityOfPage: post.url,
+    image: post.image,
+    author: {
+      "@type": "Organization",
+      name: post.author || "MATERPOOLS AND CONTRUCTION",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "MATERPOOLS AND CONTRUCTION",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.masterspools.co.zw/images/logo.jpeg",
+      },
+    },
+    datePublished: post.datePublished,
+    dateModified: post.dateModified || post.datePublished,
+  };
+}
+
+export function blogCollectionSchema(
+  items: Array<{
+    title: string;
+    url: string;
+    image?: string;
+    description?: string;
+  }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Latest Updates",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: item.url,
+      name: item.title,
+      image: item.image,
+      description: item.description,
+    })),
+  };
+}

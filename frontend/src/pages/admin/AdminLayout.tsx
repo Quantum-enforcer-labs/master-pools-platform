@@ -4,7 +4,6 @@ import {
   useNavigate,
   useRouterState,
 } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
@@ -24,6 +23,9 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import { format } from "date-fns";
+import { MetaHead } from "../../components/seo/MetaHead";
 import { useConversations } from "../../hooks/useApi";
 import { useAuthStore } from "../../stores/auth.store";
 import { useUIStore } from "../../stores/ui.store";
@@ -32,6 +34,7 @@ const NAV = [
   { to: "/admin/", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/projects", label: "Projects", icon: FolderOpen },
   { to: "/admin/quotations", label: "Quotations", icon: FileText },
+  { to: "/admin/blogs", label: "Blogs", icon: FileText },
   { to: "/admin/chat", label: "Inbox", icon: MessageCircle, badge: true },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/reviews", label: "Reviews", icon: Star },
@@ -65,20 +68,28 @@ export default function AdminLayout() {
     setMobileOpen(false);
   }, [path]);
 
-  if (!user || user.role !== "admin")
+  if (!user || user.role !== "admin") {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "var(--color-bg)",
-        }}
-      >
-        <p style={{ color: "var(--color-text-secondary)" }}>Access denied.</p>
-      </div>
+      <>
+        <MetaHead
+          title="Admin Access | MATERPOOLS AND CONTRUCTION"
+          description="Private dashboard area for managing projects, blog posts, messages, and company content."
+          noindex
+        />
+        <div
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "var(--color-bg)",
+          }}
+        >
+          <p style={{ color: "var(--color-text-secondary)" }}>Access denied.</p>
+        </div>
+      </>
     );
+  }
 
   const isActive = (to: string, exact = false) => {
     if (exact || to === "/admin/")

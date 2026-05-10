@@ -19,6 +19,15 @@ export interface ProjectImage {
   alt?: string;
 }
 
+export interface BlogImage {
+  url: string;
+  fileId?: string;
+  thumbnail?: string;
+  alt?: string;
+}
+
+export type BlogCategory = "update" | "blog" | "announcement" | "project";
+
 export type ProjectCategory =
   | "residential"
   | "commercial"
@@ -52,6 +61,23 @@ export interface Project {
   completedAt?: string;
   startedAt?: string;
   views: number;
+  createdBy?: Pick<User, "_id" | "name">;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BlogPost {
+  _id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverImage?: BlogImage;
+  tags: string[];
+  category: BlogCategory;
+  featured: boolean;
+  isPublished: boolean;
+  publishedAt?: string;
   createdBy?: Pick<User, "_id" | "name">;
   createdAt: string;
   updatedAt: string;

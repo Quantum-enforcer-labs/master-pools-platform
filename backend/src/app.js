@@ -4,8 +4,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { apiRateLimit } from "./middleware/rateLimit.middleware.js";
-
 import authRoutes from "./routes/auth.routes.js";
+import blogRoutes from "./routes/blog.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import newsletterRoutes from "./routes/newsletter.routes.js";
@@ -76,6 +76,7 @@ app.use("/api/quotations", quotationRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/blogs", blogRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/users", userRoutes);

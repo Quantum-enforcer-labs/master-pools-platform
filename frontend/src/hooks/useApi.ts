@@ -1,12 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import api from "../api/client";
 import type {
+  BlogPost,
   Conversation,
   Pagination,
   Project,
   Quotation,
   User,
 } from "../types";
+
+import api from "../api/client";
 
 /* ── Query Keys ──────────────────────────────────────────────────────────── */
 export const QK = {
@@ -16,6 +18,9 @@ export const QK = {
   projectStats: ["project-stats"] as const,
   project: (id: string) => ["project", id] as const,
   adminProjects: (p?: any) => ["admin-projects", p] as const,
+  blogPosts: (p?: any) => ["blog-posts", p] as const,
+  blogPost: (slug: string) => ["blog-post", slug] as const,
+  adminBlogPosts: (p?: any) => ["admin-blog-posts", p] as const,
   quotations: ["my-quotations"] as const,
   quotation: (id: string) => ["quotation", id] as const,
   adminQuotations: (p?: any) => ["admin-quotations", p] as const,
@@ -219,6 +224,96 @@ export const useTogglePublish = () => {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["projects"] });
       qc.invalidateQueries({ queryKey: ["admin-projects"] });
+    },
+  });
+};
+
+/* ── Blog ──────────────────────────────────────────────────────────────── */
+export const useBlogPosts = (params?: Record<string, any>) =>
+  useQuery({
+    queryKey: QK.blogPosts(params),
+    queryFn: () =>
+      api
+        .get<{
+          posts: BlogPost[];
+          pagination: Pagination;
+        }>("/blogs", { params })
+        .then((r) => r.data),
+    staleTime: 3 * 60_000,
+  });
+
+export const useBlogPost = (slug: string) =>
+  useQuery({
+    queryKey: QK.blogPost(slug),
+    queryFn: () =>
+      api.get<{ post: BlogPost }>(`/blogs/${slug}`).then((r) => r.data.post),
+    enabled: !!slug,
+    staleTime: 3 * 60_000,
+  });
+
+export const useAdminBlogPosts = (params?: Record<string, any>) =>
+  useQuery({
+    queryKey: QK.adminBlogPosts(params),
+    queryFn: () =>
+      api
+        .get<{
+          posts: BlogPost[];
+          pagination: Pagination;
+        }>("/blogs/admin/all", { params })
+        .then((r) => r.data),
+  });
+
+export const useCreateBlogPost = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: Partial<BlogPost>) =>
+      api.post<{ post: BlogPost }>("/blogs", data).then((r) => r.data.post),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["blog-posts"] });
+      qc.invalidateQueries({ queryKey: ["blog-post"] });
+      qc.invalidateQueries({ queryKey: ["admin-blog-posts"] });
+    },
+  });
+};
+
+export const useUpdateBlogPost = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: string; data: Partial<BlogPost> }) =>
+      api
+        .put<{ post: BlogPost }>(`/blogs/${id}`, data)
+        .then((r) => r.data.post),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["blog-posts"] });
+      qc.invalidateQueries({ queryKey: ["blog-post"] });
+      qc.invalidateQueries({ queryKey: ["admin-blog-posts"] });
+    },
+  });
+};
+
+export const useDeleteBlogPost = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => api.delete(`/blogs/${id}`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["blog-posts"] });
+      qc.invalidateQueries({ queryKey: ["blog-post"] });
+      qc.invalidateQueries({ queryKey: ["admin-blog-posts"] });
+    },
+  });
+};
+
+export const useToggleBlogPublish = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) =>
+      api
+        .patch<{ post: BlogPost }>(`/blogs/${id}/publish`)
+        .then((r) => r.data.post),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["blog-posts"] });
+      qc.invalidateQueries({ queryKey: ["blog-post"] });
+      qc.invalidateQueries({ queryKey: ["admin-blog-posts"] });
     },
   });
 };

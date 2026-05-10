@@ -17,6 +17,7 @@ import { Route as QuotationRouteImport } from './routes/quotation'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LatestRouteImport } from './routes/latest'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CookiePolicyRouteImport } from './routes/cookie-policy'
@@ -27,6 +28,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as ProjectsIdRouteImport } from './routes/projects.$id'
+import { Route as LatestSlugRouteImport } from './routes/latest.$slug'
 import { Route as AdminVideosRouteImport } from './routes/admin/videos'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AdminReviewsRouteImport } from './routes/admin/reviews'
@@ -35,6 +37,7 @@ import { Route as AdminProjectsRouteImport } from './routes/admin/projects'
 import { Route as AdminNewsletterRouteImport } from './routes/admin/newsletter'
 import { Route as AdminContactsRouteImport } from './routes/admin/contacts'
 import { Route as AdminChatRouteImport } from './routes/admin/chat'
+import { Route as AdminBlogsRouteImport } from './routes/admin/blogs'
 
 const VerifyOtpRoute = VerifyOtpRouteImport.update({
   id: '/verify-otp',
@@ -74,6 +77,11 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LatestRoute = LatestRouteImport.update({
+  id: '/latest',
+  path: '/latest',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -126,6 +134,11 @@ const ProjectsIdRoute = ProjectsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => ProjectsRoute,
 } as any)
+const LatestSlugRoute = LatestSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => LatestRoute,
+} as any)
 const AdminVideosRoute = AdminVideosRouteImport.update({
   id: '/videos',
   path: '/videos',
@@ -166,6 +179,11 @@ const AdminChatRoute = AdminChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminBlogsRoute = AdminBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -175,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/cookie-policy': typeof CookiePolicyRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/latest': typeof LatestRouteWithChildren
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRouteWithChildren
@@ -183,6 +202,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/admin/blogs': typeof AdminBlogsRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
@@ -191,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/admin/reviews': typeof AdminReviewsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
+  '/latest/$slug': typeof LatestSlugRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -202,6 +223,7 @@ export interface FileRoutesByTo {
   '/cookie-policy': typeof CookiePolicyRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/latest': typeof LatestRouteWithChildren
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/quotation': typeof QuotationRoute
@@ -209,6 +231,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/admin/blogs': typeof AdminBlogsRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
@@ -217,6 +240,7 @@ export interface FileRoutesByTo {
   '/admin/reviews': typeof AdminReviewsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
+  '/latest/$slug': typeof LatestSlugRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/admin': typeof AdminIndexRoute
   '/projects': typeof ProjectsIndexRoute
@@ -230,6 +254,7 @@ export interface FileRoutesById {
   '/cookie-policy': typeof CookiePolicyRoute
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/latest': typeof LatestRouteWithChildren
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRouteWithChildren
@@ -238,6 +263,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/verify-otp': typeof VerifyOtpRoute
+  '/admin/blogs': typeof AdminBlogsRoute
   '/admin/chat': typeof AdminChatRoute
   '/admin/contacts': typeof AdminContactsRoute
   '/admin/newsletter': typeof AdminNewsletterRoute
@@ -246,6 +272,7 @@ export interface FileRoutesById {
   '/admin/reviews': typeof AdminReviewsRoute
   '/admin/users': typeof AdminUsersRoute
   '/admin/videos': typeof AdminVideosRoute
+  '/latest/$slug': typeof LatestSlugRoute
   '/projects/$id': typeof ProjectsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -260,6 +287,7 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/dashboard'
     | '/forgot-password'
+    | '/latest'
     | '/login'
     | '/privacy-policy'
     | '/projects'
@@ -268,6 +296,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms-of-service'
     | '/verify-otp'
+    | '/admin/blogs'
     | '/admin/chat'
     | '/admin/contacts'
     | '/admin/newsletter'
@@ -276,6 +305,7 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/admin/users'
     | '/admin/videos'
+    | '/latest/$slug'
     | '/projects/$id'
     | '/admin/'
     | '/projects/'
@@ -287,6 +317,7 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/dashboard'
     | '/forgot-password'
+    | '/latest'
     | '/login'
     | '/privacy-policy'
     | '/quotation'
@@ -294,6 +325,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms-of-service'
     | '/verify-otp'
+    | '/admin/blogs'
     | '/admin/chat'
     | '/admin/contacts'
     | '/admin/newsletter'
@@ -302,6 +334,7 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/admin/users'
     | '/admin/videos'
+    | '/latest/$slug'
     | '/projects/$id'
     | '/admin'
     | '/projects'
@@ -314,6 +347,7 @@ export interface FileRouteTypes {
     | '/cookie-policy'
     | '/dashboard'
     | '/forgot-password'
+    | '/latest'
     | '/login'
     | '/privacy-policy'
     | '/projects'
@@ -322,6 +356,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms-of-service'
     | '/verify-otp'
+    | '/admin/blogs'
     | '/admin/chat'
     | '/admin/contacts'
     | '/admin/newsletter'
@@ -330,6 +365,7 @@ export interface FileRouteTypes {
     | '/admin/reviews'
     | '/admin/users'
     | '/admin/videos'
+    | '/latest/$slug'
     | '/projects/$id'
     | '/admin/'
     | '/projects/'
@@ -343,6 +379,7 @@ export interface RootRouteChildren {
   CookiePolicyRoute: typeof CookiePolicyRoute
   DashboardRoute: typeof DashboardRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  LatestRoute: typeof LatestRouteWithChildren
   LoginRoute: typeof LoginRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProjectsRoute: typeof ProjectsRouteWithChildren
@@ -409,6 +446,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/latest': {
+      id: '/latest'
+      path: '/latest'
+      fullPath: '/latest'
+      preLoaderRoute: typeof LatestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -481,6 +525,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsIdRouteImport
       parentRoute: typeof ProjectsRoute
     }
+    '/latest/$slug': {
+      id: '/latest/$slug'
+      path: '/$slug'
+      fullPath: '/latest/$slug'
+      preLoaderRoute: typeof LatestSlugRouteImport
+      parentRoute: typeof LatestRoute
+    }
     '/admin/videos': {
       id: '/admin/videos'
       path: '/videos'
@@ -537,10 +588,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminChatRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/blogs': {
+      id: '/admin/blogs'
+      path: '/blogs'
+      fullPath: '/admin/blogs'
+      preLoaderRoute: typeof AdminBlogsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminBlogsRoute: typeof AdminBlogsRoute
   AdminChatRoute: typeof AdminChatRoute
   AdminContactsRoute: typeof AdminContactsRoute
   AdminNewsletterRoute: typeof AdminNewsletterRoute
@@ -553,6 +612,7 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminBlogsRoute: AdminBlogsRoute,
   AdminChatRoute: AdminChatRoute,
   AdminContactsRoute: AdminContactsRoute,
   AdminNewsletterRoute: AdminNewsletterRoute,
@@ -565,6 +625,17 @@ const AdminRouteChildren: AdminRouteChildren = {
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface LatestRouteChildren {
+  LatestSlugRoute: typeof LatestSlugRoute
+}
+
+const LatestRouteChildren: LatestRouteChildren = {
+  LatestSlugRoute: LatestSlugRoute,
+}
+
+const LatestRouteWithChildren =
+  LatestRoute._addFileChildren(LatestRouteChildren)
 
 interface ProjectsRouteChildren {
   ProjectsIdRoute: typeof ProjectsIdRoute
@@ -588,6 +659,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiePolicyRoute: CookiePolicyRoute,
   DashboardRoute: DashboardRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  LatestRoute: LatestRouteWithChildren,
   LoginRoute: LoginRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRouteWithChildren,

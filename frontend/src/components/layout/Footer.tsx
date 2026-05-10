@@ -1,7 +1,14 @@
-import { Facebook, Instagram, Linkedin, Phone, Twitter } from "lucide-react";
-import NewsletterSignup from "../ui/NewsletterSignup";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  MessageCircle,
+  Phone,
+  Twitter,
+} from "lucide-react";
 
 import { Link } from "@tanstack/react-router";
+import NewsletterSignup from "../ui/NewsletterSignup";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -132,6 +139,40 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            {/* WhatsApp Icon */}
+            <a
+              href="https://wa.me/263772562125"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                width: "2.25rem",
+                height: "2.25rem",
+                borderRadius: "8px",
+                background: "var(--color-gray-100)",
+                border: "1px solid var(--color-border)",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--color-gray-400)",
+                textDecoration: "none",
+                transition: "all 0.15s ease",
+                marginLeft: "0.5rem",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#25D366";
+                e.currentTarget.style.color = "#FFFFFF";
+                e.currentTarget.style.borderColor = "#25D366";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "var(--color-gray-100)";
+                e.currentTarget.style.color = "var(--color-gray-400)";
+                e.currentTarget.style.borderColor = "var(--color-border)";
+              }}
+            >
+              <MessageCircle
+                style={{ width: "0.875rem", height: "0.875rem" }}
+              />
+            </a>
           </div>
 
           {/* Links */}
@@ -158,6 +199,7 @@ export default function Footer() {
               {[
                 { to: "/", l: "Home" },
                 { to: "/projects", l: "Projects" },
+                { to: "/latest", l: "Latest Updates" },
                 { to: "/about", l: "About Us" },
                 { to: "/contact", l: "Contact" },
                 { to: "/quotation", l: "Get a Quote" },
@@ -269,6 +311,11 @@ export default function Footer() {
                   Icon: Phone,
                   text: "+263 775 206 774",
                   href: "tel:+263775206774",
+                },
+                {
+                  Icon: MessageCircle,
+                  text: "WhatsApp",
+                  href: "https://wa.me/263772562125",
                 },
               ].map(({ Icon, text, href }) => (
                 <div

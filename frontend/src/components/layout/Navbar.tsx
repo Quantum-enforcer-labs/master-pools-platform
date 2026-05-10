@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
 import { useConversations } from "../../hooks/useApi";
 import { useAuthStore } from "../../stores/auth.store";
 import { useUIStore } from "../../stores/ui.store";
@@ -21,6 +22,7 @@ import NotificationCenter from "../shared/NotificationCenter";
 const NAV = [
   { to: "/" as const, label: "Home" },
   { to: "/projects" as const, label: "Projects" },
+  { to: "/latest" as const, label: "Latest" },
   { to: "/about" as const, label: "About" },
   { to: "/contact" as const, label: "Contact" },
 ];

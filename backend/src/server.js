@@ -4,7 +4,7 @@ import http from "http";
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
 import { initSocket } from "./config/socket.js";
-import { seedAdmin } from "./utils/seed.js";
+import { seedAdmin, seedBlogPost } from "./utils/seed.js";
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +14,7 @@ initSocket(server);
 connectDB().then(async (connected) => {
   if (connected) {
     await seedAdmin();
+    await seedBlogPost();
   }
 
   server.listen(PORT, () => {

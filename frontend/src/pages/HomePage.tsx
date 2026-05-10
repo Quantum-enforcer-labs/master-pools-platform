@@ -370,6 +370,7 @@ export default function HomePage() {
         {/* ══ HERO ════════════════════════════════════════════════════════ */}
         <section
           ref={heroRef}
+          className="hero-home"
           style={{
             position: "relative",
             minHeight: "100vh",
